@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leong Shem Yin - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Miskan';
+            src: url('https://cdn.jsdelivr.net/gh/rsms/inter@v3.19/docs/font-files/Miskan-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --olive-dark: #3a4a3a;
+            --olive-medium: #4a5d4a;
+            --olive-light: #5a6d5a;
+            --cream: #f5f3ed;
+            --accent-yellow: #ffd700;
+            --text-light: #f5f3ed;
+            --text-dark: #2a2a2a;
+        }
+
+        body {
+            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--olive-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(58, 74, 58, 0.95), rgba(58, 74, 58, 0));
+        }
+
+        .logo {
+            font-family: 'Miskan', 'Work Sans', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .nav-links a.active {
+            color: var(--accent-yellow);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-family: 'Miskan', 'Work Sans', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.95;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .hero-title .outline {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--text-light);
+            text-stroke: 2px var(--text-light);
+            display: block;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-title .outline:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .hero-title .outline:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .hero-title .outline:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .hero-title .filled {
+            display: block;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.8s;
+        }
+
+        .accent-star {
+            color: var(--accent-yellow);
+            display: inline-block;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-image {
+            width: 400px;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Decorative Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            border: 3px solid var(--text-light);
+            border-radius: 50%;
+            top: 10%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            border: 3px solid var(--accent-yellow);
+            top: 70%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            font-size: 8rem;
+            color: var(--accent-yellow);
+            top: 30%;
+            right: 5%;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* About Section */
+        .section {
+            min-height: 100vh;
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Miskan', 'Work Sans', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background-color: var(--accent-yellow);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-yellow);
+            transform: translateY(-5px);
+        }
+
+        .skill-card h3 {
+            font-family: 'Miskan', 'Work Sans', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            color: var(--accent-yellow);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background-color: var(--olive-medium);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+        }
+
+        .project-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 2rem;
+        }
+
+        .project-info h3 {
+            font-family: 'Miskan', 'Work Sans', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: var(--accent-yellow);
+            color: var(--text-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--olive-light);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .contact-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-button {
+            background-color: var(--accent-yellow);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .contact-button:hover {
+            background-color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--olive-dark);
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-yellow);
+            transform: translateY(-3px);
+        }
+
+        /* Project Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            max-width: 1000px;
+            margin: 3rem auto;
+            background-color: var(--olive-medium);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Miskan', 'Work Sans', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .modal-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .screenshot {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--olive-light), var(--olive-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-yellow);
+            font-size: 3rem;
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .modal-details {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-details h4 {
+            font-family: 'Miskan', 'Work Sans', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-yellow);
+        }
+
+        .modal-details p {
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--olive-dark);
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-image {
+                width: 300px;
+                height: 400px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .section {
+                padding: 6rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                width: 250px;
+                height: 350px;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="my-logo.png" alt="Logo">
+            </div>
+            <span>shem</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#about">About me</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3">✦</div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="outline">LEONG SHEM YIN</span>
+                    <span class="outline">LEONG SHEM YIN</span>
+                    <span class="outline">LEONG SHEM YIN</span>
+                    <span class="filled">LEONG SHEM YIN <span class="accent-star">✦</span></span>
+                </h1>
+            </div>
+            <div class="hero-image">
+                <img src="my-photo.jpg" alt="Leong Shem Yin">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    I'm a creative designer and developer who finds inspiration in the natural world. 
+                    My work blends organic aesthetics with modern digital experiences, creating interfaces 
+                    that feel both grounded and innovative.
+                </p>
+                <p>
+                    With a background in visual design and front-end development, I specialize in 
+                    crafting memorable digital experiences that stand out from the ordinary. Every project 
+                    is an opportunity to push boundaries and create something truly distinctive.
+                </p>
+                <p>
+                    When I'm not designing, you'll find me exploring nature trails, experimenting with 
+                    photography, or searching for inspiration in unexpected places.
+                </p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>UI/UX Design</h3>
+                    <p>Creating intuitive and beautiful user experiences</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Web Development</h3>
+                    <p>Building responsive and performant websites</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Branding</h3>
+                    <p>Developing cohesive visual identities</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Typography</h3>
+                    <p>Crafting compelling typographic systems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section portfolio">
+        <h2 class="section-title">Selected Work</h2>
+        <div class="projects-grid">
+            <div class="project-card" data-project="vr-escape">
+                <div class="project-image">
+                    <img src="cover-photo-1.png" alt="VR Escape Room Game">
+                </div>
+                <div class="project-info">
+                    <h3>VR Escape Room Game</h3>
+                    <p>An immersive virtual reality escape room experience built with Unity.</p>
+                    <div class="project-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">C#</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="fashion-wireframe">
+                <div class="project-image">
+                    <img src="cover-photo-2.png" alt="Sustainable Fashion Website Wireframe">
+                </div>
+                <div class="project-info">
+                    <h3>Sustainable Fashion Website Wireframe</h3>
+                    <p>E-commerce wireframe design for a sustainable fashion platform.</p>
+                    <div class="project-tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">E-commerce</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="rc-events">
+                <div class="project-image">
+                    <img src="cover-photo-3.png" alt="RC Events Hub">
+                </div>
+                <div class="project-info">
+                    <h3>RC Events Hub</h3>
+                    <p>Full-stack events management platform with RESTful API and SQL database.</p>
+                    <div class="project-tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">SQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="sgc-instagram">
+                <div class="project-image">
+                    <img src="cover-photo-4.png" alt="SGC Instagram Feedpost">
+                </div>
+                <div class="project-info">
+                    <h3>SGC Instagram Feedpost</h3>
+                    <p>Social media content design for Instagram feed posts.</p>
+                    <div class="project-tags">
+                        <span class="tag">Photoshop</span>
+                        <span class="tag">Illustrator</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="calorie-tracker">
+                <div class="project-image">
+                    <img src="cover-photo-5.png" alt="Calorie Tracker App">
+                </div>
+                <div class="project-info">
+                    <h3>Calorie Tracker App</h3>
+                    <p>Mobile application for tracking daily calorie intake and nutrition goals.</p>
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JSX</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="eco-tracker">
+                <div class="project-image">
+                    <img src="cover-photo-6.png" alt="Eco Tracker App">
+                </div>
+                <div class="project-info">
+                    <h3>Eco Tracker App</h3>
+                    <p>Environmental impact tracking app to monitor and reduce carbon footprint.</p>
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JSX</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="avatar-design">
+                <div class="project-image">
+                    <img src="cover-photo-7.png" alt="5 Avatar Design">
+                </div>
+                <div class="project-info">
+                    <h3>5 Avatar Design</h3>
+                    <p>Character avatar design set created in Adobe Illustrator.</p>
+                    <div class="project-tags">
+                        <span class="tag">Illustrator</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-content">
+            <p class="contact-text">
+                I'm always excited to collaborate on meaningful projects or just chat about design, 
+                nature, and creative ideas. Let's create something beautiful together.
+            </p>
+            <div class="contact-methods">
+                <a href="mailto:24031498@myrp.edu.sg" class="contact-button">Email Me</a>
+                <a href="your-resume.pdf" class="contact-button" download>View Resume</a>
+            </div>
+        </div>
+    </section>
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 class="modal-title" id="modalTitle">Project Title</h2>
+            <div class="modal-tags" id="modalTags"></div>
+            <p class="modal-description" id="modalDescription">Project description goes here.</p>
+            
+            <div class="modal-details">
+                <h4>Project Overview</h4>
+                <p id="modalOverview">Detailed project information goes here.</p>
+            </div>
+
+            <div class="modal-screenshots" id="modalScreenshots">
+                <!-- Screenshots will be inserted here -->
+            </div>
+
+            <div class="modal-details">
+                <h4>Technologies Used</h4>
+                <p id="modalTech">List of technologies and tools used in the project.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/leong-shem-yin-shemxy10/" target="_blank" title="LinkedIn">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                </svg>
+            </a>
+            <a href="https://github.com/shemxy" target="_blank" title="GitHub">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
+                </svg>
+            </a>
+        </div>
+        <p>&copy; 2026 Leong Shem Yin. All rights reserved.</p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Project data - customize this with your actual project information
+        const projectData = {
+            'vr-escape': {
+                title: "VR Escape Room Game",
+                description: "Developed an immersive VR escape room set inside a cursed ancient Egyptian tomb, where players must solve four environmental puzzles to break the forgotten Pharaoh Tutankhamun’s curse before being trapped forever. Built interactive mechanics in Unity using C#, including trigger-based events such as pressure plates, object placement, and a physical keypad puzzle to control game progression. The project emphasized atmospheric world-building, spatial interaction, and player immersion while encouraging critical thinking through narrative-driven puzzle design.",
+                tags: ["Unity", "C#"],
+                overview: "A fully immersive VR escape room game featuring puzzle-solving mechanics, interactive objects, and atmospheric environments. Players must work together to solve clues and escape before time runs out.",
+                tech: "Unity 3D, C#, VR SDK",
+                screenshots: [
+                    "vr-escape-1.png",
+                    "vr-escape-2.png",
+                    "vr-escape-3.png"
+                ]
+            },
+            'fashion-wireframe': {
+                title: "Sustainable Fashion Website Wireframe",
+                description: "E-commerce wireframe design for a sustainable fashion platform.",
+                tags: ["Figma", "E-commerce"],
+                overview: "Comprehensive wireframe design for an e-commerce platform focused on sustainable fashion. Includes user flows, product pages, checkout process, and mobile responsiveness.",
+                tech: "Figma, User Flow Diagrams, Prototyping",
+                screenshots: [
+                    "fashion-wireframe-1.jpg",
+                    "fashion-wireframe-2.jpg",
+                    "fashion-wireframe-3.jpg"
+                ]
+            },
+            'rc-events': {
+                title: "RC Events Hub",
+                description: "Full-stack events management platform with RESTful API and SQL database.",
+                tags: ["Node.js", "Express", "SQL"],
+                overview: "A comprehensive events management system allowing users to create, manage, and RSVP to events. Features include user authentication, real-time updates, and admin dashboard.",
+                tech: "Node.js, Express.js, SQL Database, REST API, JWT Authentication",
+                screenshots: [
+                    "rc-events-1.jpg",
+                    "rc-events-2.jpg",
+                    "rc-events-3.jpg"
+                ]
+            },
+            'sgc-instagram': {
+                title: "SGC Instagram Feedpost",
+                description: "Social media content design for Instagram feed posts.",
+                tags: ["Photoshop", "Illustrator"],
+                overview: "A series of engaging Instagram feed posts designed for social media marketing. Focus on brand consistency, visual appeal, and audience engagement.",
+                tech: "Adobe Photoshop, Adobe Illustrator, Social Media Design",
+                screenshots: [
+                    "sgc-instagram-1.jpg",
+                    "sgc-instagram-2.jpg",
+                    "sgc-instagram-3.jpg"
+                ]
+            },
+            'calorie-tracker': {
+                title: "Calorie Tracker App",
+                description: "Mobile application for tracking daily calorie intake and nutrition goals.",
+                tags: ["React Native", "CSS", "JSX"],
+                overview: "A user-friendly mobile app that helps users track their daily calorie intake, set nutrition goals, and monitor their progress. Features include barcode scanning, meal logging, and progress visualization.",
+                tech: "React Native, CSS, JSX, AsyncStorage, Chart Library",
+                screenshots: [
+                    "calorie-tracker-1.jpg",
+                    "calorie-tracker-2.jpg",
+                    "calorie-tracker-3.jpg"
+                ]
+            },
+            'eco-tracker': {
+                title: "Eco Tracker App",
+                description: "Environmental impact tracking app to monitor and reduce carbon footprint.",
+                tags: ["React Native", "CSS", "JSX"],
+                overview: "An environmental awareness app that helps users track their carbon footprint, monitor daily habits, and receive personalized tips for reducing environmental impact.",
+                tech: "React Native, CSS, JSX, Environmental APIs, Data Visualization",
+                screenshots: [
+                    "eco-tracker-1.jpg",
+                    "eco-tracker-2.jpg",
+                    "eco-tracker-3.jpg"
+                ]
+            },
+            'avatar-design': {
+                title: "5 Avatar Design",
+                description: "Character avatar design set created in Adobe Illustrator.",
+                tags: ["Illustrator"],
+                overview: "A collection of five unique character avatars designed with distinct personalities and styles. Created using vector graphics for scalability and versatility across different platforms.",
+                tech: "Adobe Illustrator, Vector Graphics, Character Design",
+                screenshots: [
+                    "avatar-design-1.jpg",
+                    "avatar-design-2.jpg",
+                    "avatar-design-3.jpg"
+                ]
+            }
+        };
+
+        // Open modal with project data
+        function openModal(projectId) {
+            const project = projectData[projectId];
+            const modal = document.getElementById('projectModal');
+            
+            // Populate modal content
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalDescription').textContent = project.description;
+            document.getElementById('modalOverview').textContent = project.overview;
+            document.getElementById('modalTech').textContent = project.tech;
+            
+            // Add tags
+            const tagsContainer = document.getElementById('modalTags');
+            tagsContainer.innerHTML = '';
+            project.tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'tag';
+                tagElement.textContent = tag;
+                tagsContainer.appendChild(tagElement);
+            });
+            
+            // Add screenshots
+            const screenshotsContainer = document.getElementById('modalScreenshots');
+            screenshotsContainer.innerHTML = '';
+            project.screenshots.forEach(screenshot => {
+                const screenshotDiv = document.createElement('div');
+                screenshotDiv.className = 'screenshot';
+                screenshotDiv.innerHTML = `<img src="${screenshot}" alt="Project screenshot">`;
+                screenshotsContainer.appendChild(screenshotDiv);
+            });
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Add click handlers to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const projectId = this.getAttribute('data-project');
+                openModal(projectId);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        const sections = document.querySelectorAll('.section, .hero');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+       // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach((shape, index) => {
+                const speed = 0.2 + (index * 0.1);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script> 
