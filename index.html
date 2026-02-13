@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Portfolio of Leong Shem Yin - Digital Design and Development Student">
     <title>Leong Shem Yin - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,9 +19,9 @@
             <span>shem</span>
         </div>
         <ul class="nav-links">
+            <li><a href="#about">About me</a></li>
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#about">About me</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -84,6 +85,52 @@
                     <h3>Interactive Development</h3>
                     <p>Developing immersive experiences and gameplay mechanics using Unity and C#</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates" class="section certificates">
+        <h2 class="section-title">Certifications & Achievements</h2>
+        <div class="certificates-container">
+            <div class="certificate-card" data-cert="cert-1">
+                <div class="certificate-content">
+                    <h3>LinkedIn Learning Certificates</h3>
+                    <p class="certificate-issuer">LinkedIn</p>
+                    <p class="certificate-date">2025-2026</p>
+                    <div class="certificate-tags">
+                        <span class="cert-tag">Software Testing</span>
+                        <span class="cert-tag">Project Management</span>
+                        <span class="cert-tag">JavaScript</span>
+                        <span class="cert-tag">Adobe Photoshop</span>
+                        <span class="cert-tag">Adobe Illustrator</span>
+                        <span class="cert-tag">Bootstrap</span>
+                        <span class="cert-tag">Test Planning</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certificate-card" data-cert="cert-2">
+                <div class="certificate-content">
+                    <h3>AIdea Challenge 2025</h3>
+                    <p class="certificate-issuer">Cisco</p>
+                    <p class="certificate-date">November 2025</p>
+                    <div class="certificate-tags">
+                        <span class="cert-tag">AI solution</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certificate-card" data-cert="cert-3">
+                <div class="certificate-content">
+                    <h3>HackerRank Frontend Developer</h3>
+                    <p class="certificate-issuer">HackerRank</p>
+                    <p class="certificate-date">February 2023</p>
+                    <div class="certificate-tags">
+                        <span class="cert-tag">Frontend Development</span>
+                        <span class="cert-tag">React</span>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </section>
@@ -202,7 +249,7 @@
             </p>
             <div class="contact-methods">
                 <a href="mailto:24031498@myrp.edu.sg" class="contact-button">Email Me</a>
-                <a href="Resume_LEONG_SHEM_YIN__24031498.pdf" class="contact-button" download>View Resume</a>
+                <a href="your-resume.pdf" class="contact-button" download>View Resume</a>
             </div>
         </div>
     </section>
@@ -243,9 +290,48 @@
         </div>
     </div>
 
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="certificate-modal-content">
+            <button class="modal-close" onclick="closeCertificateModal()">&times;</button>
+            <div class="certificate-viewer">
+                <!-- Single image container (for regular certs) -->
+                <div id="singleImageContainer" class="single-image-container">
+                    <img id="certificateImage" src="" alt="Certificate">
+                </div>
+                
+                <!-- Multiple images carousel (for LinkedIn certs) -->
+                <div id="multiImageContainer" class="multi-image-container" style="display: none;">
+                    <div class="cert-carousel">
+                        <button class="cert-carousel-nav cert-carousel-prev" onclick="prevCertImage()">‹</button>
+                        <div class="cert-carousel-images">
+                            <img id="certCarouselImage" src="" alt="Certificate">
+                        </div>
+                        <button class="cert-carousel-nav cert-carousel-next" onclick="nextCertImage()">›</button>
+                    </div>
+                    <div class="cert-carousel-counter">
+                        <span id="certCurrentImage">1</span> / <span id="certTotalImages">1</span>
+                    </div>
+                    <div class="cert-thumbnails" id="certThumbnails"></div>
+                </div>
+                
+                <div class="certificate-modal-info">
+                    <h3 id="certModalTitle">Certificate Title</h3>
+                    <p id="certModalIssuer">Issuer</p>
+                    <p id="certModalDate">Date</p>
+                    <div id="certModalTags" class="modal-tags"></div>
+                    <p id="certModalDescription">Certificate description</p>
+                    <a id="certLinkedInLink" href="#" target="_blank" class="linkedin-link" style="display: none;">
+                        View All Certificates on LinkedIn →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="social-links">
-            <a href="https://www.linkedin.com/in/leong-shem-yin" target="_blank" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/leong-shem-yin-shemxy10/" target="_blank" title="LinkedIn">
                 <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
                 </svg>

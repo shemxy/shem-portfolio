@@ -1,4 +1,3 @@
-
 const projectData = {
     'vr-escape': {
         title: "VR Escape Room Game",
@@ -95,19 +94,64 @@ const projectData = {
     }
 };
 
+const certificateData = {
+    'cert-1': {
+        title: "LinkedIn Learning Certificates",
+        issuer: "Issued by LinkedIn",
+        date: "2025 - 2026",
+        tags: ["Professional Development", "Continuous Learning"],
+        description: "Professional development courses completed through LinkedIn Learning, covering a range of skills in design, development, and digital technologies.",
+        linkedinProfile: "https://www.linkedin.com/in/leong-shem-yin/details/certifications/",
+        images: [
+            "images/linkedin-1.jpg",
+            "images/linkedin-2.jpg",
+            "images/linkedin-3.jpg",
+            "images/linkedin-4.jpg",
+            "images/linkedin-5.jpg",
+            "images/linkedin-6.jpg",
+            "images/linkedin-7.jpg",
+            "images/linkedin-8.jpg",
+            "images/linkedin-9.jpg"
+        ]
+    },
+    'cert-2': {
+        title: "AIdea 2025 - Build a bot, Spark a Solution",
+        issuer: "Organised by Cisco",
+        date: "November 2025",
+        tags: ["AI solutions"],
+        description: "Developed and designed an AI-driven chatbot, Meda, designed to streamline hospital navigation, appointment scheduling, and basic health guidance for the public. The solution prioritizes user safety by implementing an intelligent triage system that identifies urgent symptoms and redirects users to qualified medical professionals. Built to improve healthcare accessibility while reducing administrative overhead.",
+        image: "images/aidea-1.jpg"
+    },
+    'cert-3': {
+        title: "HackerRank Frontend Developer (React) Certificate",
+        issuer: "Issued by HackerRank",
+        date: "February 2026",
+        tags: ["Development, React"],
+        description: "Validated proficiency in React.js, including state management, component lifecycle, and efficient UI rendering. Demonstrated ability to solve complex frontend challenges using modern React hooks and best practices.",
+        image: "images/hackerrank.png"
+    },
+};
 
+// Carousel state
 let currentCarouselImages = [];
 let currentCarouselIndex = 0;
 
+// Certificate carousel state
+let currentCertImages = [];
+let currentCertImageIndex = 0;
+
+// Open modal with project data
 function openModal(projectId) {
     const project = projectData[projectId];
     const modal = document.getElementById('projectModal');
     
+    // Populate modal content
     document.getElementById('modalTitle').textContent = project.title;
     document.getElementById('modalDescription').textContent = project.description;
     document.getElementById('modalOverview').textContent = project.overview;
     document.getElementById('modalTech').textContent = project.tech;
-
+    
+    // Add tags
     const tagsContainer = document.getElementById('modalTags');
     tagsContainer.innerHTML = '';
     project.tags.forEach(tag => {
@@ -117,6 +161,7 @@ function openModal(projectId) {
         tagsContainer.appendChild(tagElement);
     });
     
+    // Add screenshots with click handlers
     const screenshotsContainer = document.getElementById('modalScreenshots');
     screenshotsContainer.innerHTML = '';
     project.screenshots.forEach((screenshot, index) => {
@@ -131,12 +176,14 @@ function openModal(projectId) {
     document.body.style.overflow = 'hidden';
 }
 
+// Close modal
 function closeModal() {
     const modal = document.getElementById('projectModal');
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
 }
 
+// Open image carousel
 function openCarousel(images, startIndex = 0) {
     currentCarouselImages = images;
     currentCarouselIndex = startIndex;
@@ -154,22 +201,26 @@ function openCarousel(images, startIndex = 0) {
     document.body.style.overflow = 'hidden';
 }
 
+// Close carousel
 function closeCarousel() {
     const carousel = document.getElementById('imageCarousel');
     carousel.classList.remove('active');
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden'; // Keep overflow hidden if modal is still open
 }
 
+// Navigate to previous image
 function previousImage() {
     currentCarouselIndex = (currentCarouselIndex - 1 + currentCarouselImages.length) % currentCarouselImages.length;
     updateCarouselImage();
 }
 
+// Navigate to next image
 function nextImage() {
     currentCarouselIndex = (currentCarouselIndex + 1) % currentCarouselImages.length;
     updateCarouselImage();
 }
 
+// Update carousel image
 function updateCarouselImage() {
     const carouselImage = document.getElementById('carouselImage');
     const currentImageNumber = document.getElementById('currentImageNumber');
@@ -178,8 +229,114 @@ function updateCarouselImage() {
     currentImageNumber.textContent = currentCarouselIndex + 1;
 }
 
+// Certificate Modal Functions
+function openCertificateModal(certId) {
+    const cert = certificateData[certId];
+    const modal = document.getElementById('certificateModal');
+    
+    // Populate modal content
+    document.getElementById('certModalTitle').textContent = cert.title;
+    document.getElementById('certModalIssuer').textContent = cert.issuer;
+    document.getElementById('certModalDate').textContent = cert.date;
+    document.getElementById('certModalDescription').textContent = cert.description;
+    
+    // Add tags
+    const tagsContainer = document.getElementById('certModalTags');
+    tagsContainer.innerHTML = '';
+    cert.tags.forEach(tag => {
+        const tagElement = document.createElement('span');
+        tagElement.className = 'tag';
+        tagElement.textContent = tag;
+        tagsContainer.appendChild(tagElement);
+    });
+    
+    // Handle LinkedIn link
+    const linkedinLink = document.getElementById('certLinkedInLink');
+    if (cert.linkedinProfile) {
+        linkedinLink.href = cert.linkedinProfile;
+        linkedinLink.style.display = 'inline-block';
+    } else {
+        linkedinLink.style.display = 'none';
+    }
+    
+    // Handle single vs multiple images
+    const singleContainer = document.getElementById('singleImageContainer');
+    const multiContainer = document.getElementById('multiImageContainer');
+    
+    if (cert.images && cert.images.length > 1) {
+        // Multiple images - show carousel
+        singleContainer.style.display = 'none';
+        multiContainer.style.display = 'block';
+        
+        currentCertImages = cert.images;
+        currentCertImageIndex = 0;
+        
+        // Set up carousel
+        document.getElementById('certCarouselImage').src = currentCertImages[0];
+        document.getElementById('certCurrentImage').textContent = '1';
+        document.getElementById('certTotalImages').textContent = currentCertImages.length;
+        
+        // Create thumbnails
+        const thumbnailsContainer = document.getElementById('certThumbnails');
+        thumbnailsContainer.innerHTML = '';
+        currentCertImages.forEach((img, index) => {
+            const thumbnail = document.createElement('img');
+            thumbnail.src = img;
+            thumbnail.className = 'cert-thumbnail' + (index === 0 ? ' active' : '');
+            thumbnail.onclick = () => goToCertImage(index);
+            thumbnailsContainer.appendChild(thumbnail);
+        });
+    } else {
+        // Single image
+        multiContainer.style.display = 'none';
+        singleContainer.style.display = 'block';
+        document.getElementById('certificateImage').src = cert.image || (cert.images ? cert.images[0] : '');
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCertificateModal() {
+    const modal = document.getElementById('certificateModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+function prevCertImage() {
+    currentCertImageIndex = (currentCertImageIndex - 1 + currentCertImages.length) % currentCertImages.length;
+    updateCertCarousel();
+}
+
+function nextCertImage() {
+    currentCertImageIndex = (currentCertImageIndex + 1) % currentCertImages.length;
+    updateCertCarousel();
+}
+
+function goToCertImage(index) {
+    currentCertImageIndex = index;
+    updateCertCarousel();
+}
+
+function updateCertCarousel() {
+    document.getElementById('certCarouselImage').src = currentCertImages[currentCertImageIndex];
+    document.getElementById('certCurrentImage').textContent = currentCertImageIndex + 1;
+    
+    // Update thumbnail active state
+    document.querySelectorAll('.cert-thumbnail').forEach((thumb, index) => {
+        if (index === currentCertImageIndex) {
+            thumb.classList.add('active');
+        } else {
+            thumb.classList.remove('active');
+        }
+    });
+}
+
+// Keyboard navigation for carousel
 document.addEventListener('keydown', (e) => {
     const carousel = document.getElementById('imageCarousel');
+    const certModal = document.getElementById('certificateModal');
+    
     if (carousel.classList.contains('active')) {
         if (e.key === 'ArrowLeft') {
             previousImage();
@@ -190,24 +347,50 @@ document.addEventListener('keydown', (e) => {
         }
     }
     
+    if (certModal && certModal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+            closeCertificateModal();
+        } else if (e.key === 'ArrowLeft') {
+            const multiContainer = document.getElementById('multiImageContainer');
+            if (multiContainer.style.display !== 'none') {
+                prevCertImage();
+            }
+        } else if (e.key === 'ArrowRight') {
+            const multiContainer = document.getElementById('multiImageContainer');
+            if (multiContainer.style.display !== 'none') {
+                nextCertImage();
+            }
+        }
+    }
+    
     const modal = document.getElementById('projectModal');
     if (modal.classList.contains('active') && e.key === 'Escape' && !carousel.classList.contains('active')) {
         closeModal();
     }
 });
 
+// Close modal when clicking outside
 document.getElementById('projectModal').addEventListener('click', function(e) {
     if (e.target === this) {
         closeModal();
     }
 });
 
+// Close carousel when clicking outside image
 document.getElementById('imageCarousel').addEventListener('click', function(e) {
     if (e.target === this) {
         closeCarousel();
     }
 });
 
+// Close certificate modal when clicking outside
+document.getElementById('certificateModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeCertificateModal();
+    }
+});
+
+// Add click handlers to project cards
 document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('click', function() {
         const projectId = this.getAttribute('data-project');
@@ -215,19 +398,33 @@ document.querySelectorAll('.project-card').forEach(card => {
     });
 });
 
+// Add click handlers to certificate cards
+document.querySelectorAll('.certificate-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const certId = this.getAttribute('data-cert');
+        openCertificateModal(certId);
+    });
+});
+
+// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        const href = this.getAttribute('href');
+        
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
 });
 
+// Update active nav link on scroll
 const sections = document.querySelectorAll('.section, .hero');
 const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -249,6 +446,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
+// Parallax effect for floating shapes
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const shapes = document.querySelectorAll('.shape');
